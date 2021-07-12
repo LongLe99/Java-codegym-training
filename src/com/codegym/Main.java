@@ -1,37 +1,32 @@
 package com.codegym;
 
-import java.util.Scanner;
-
 public class Main {
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the number:");
-
-        int number = scanner.nextInt();
-
-        boolean isPrime = true;
+    public static boolean isPrime(int number) {
         if( number > 0) {
             if( number == 1 || number == 2 ) {
-                isPrime = true;
+                return true;
             }else {
                 int i = 2;
                 while(i < number) {
                     if (number % i == 0) {
-                        isPrime = false;
-                        break;
+                        return false;
                     }
                     i++;
                 }
             }
         }else {
-            isPrime = false;
+            return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        for(int number = 2; number <= 100; number++) {
+            boolean isPrime = isPrime(number);
+            if(isPrime) {
+                System.out.printf(" %d is a prime \n", number);
+            }
         }
 
-        if(isPrime) {
-            System.out.printf(" %d is a prime", number);
-        }else {
-            System.out.printf(" %d is not a prime", number);
-        }
     }
 }
