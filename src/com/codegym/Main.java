@@ -1,52 +1,52 @@
 package com.codegym;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    public static void printArray(int[] array){
+    public static void printArray(Integer[] array) {
 		for (int i : array) {
 			System.out.print(i + "\t");
 		}
 		System.out.println();
 	}
 
-	public static void reverseArray(int[] array){
-    	for (int i = 0; i < array.length / 2; i++) {
-    		int placeToReverse = array.length - 1 - i;
-    		int temp = array[i];
-    		array[i] = array[placeToReverse];
-			array[placeToReverse] = temp;
-		}
-
-    	printArray(array);
+	public static void removeElement (int index, Integer[] array) {
+    	for (int j = index; j < array.length - 1; j++) {
+    		if(j == array.length - 2) {
+    			int temp = array[j+1];
+    			System.out.print(temp);
+    			array[j+1] = 0;
+				array[j] = temp;
+				break;
+    		}
+    		array[j] = array[j+1];
+    	}
 	}
 
     public static void main(String[] args) {
 	Scanner scanner = new Scanner(System.in);
 
-	int size;
-	int[] array;
+	int element;
+	Integer[] array = new Integer[40];
+	for (int i = 0; i < 40; i++) {
+		array[i] = i + 15;
+	}
 
 	do {
-	    System.out.print("Enter a size:");
-	    size = scanner.nextInt();
-	    if(size > 20){
-            System.out.print("Size cannot exceed 20");
-        }
-    }while(size > 20);
-
-	array = new int[size];
-
-	for(int i = 0; i < array.length; i++){
-	    System.out.print("Enter element " + (i + 1)+ ": ");
-        array[i] = scanner.nextInt();
-	}
+		System.out.print("Enter the value you want to remove:");
+		element = scanner.nextInt();
+	}while(element < 0);
 
 	printArray(array);
 
-	reverseArray(array);
+	int index = Arrays.asList(array).indexOf(element);
+	System.out.println(index);
+	System.out.printf("%d is at %d \n", element, index);
 
-
-
+	removeElement(index, array);
+	printArray(array);
     }
+
+
 }
